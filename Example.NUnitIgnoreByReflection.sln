@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.NUnitIgnoreByReflection", "Example.NUnitIgnoreByReflection\Example.NUnitIgnoreByReflection.csproj", "{A175B972-4D83-4505-8E83-E93A23BD13C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.ReflectionHelper", "Example.ReflectionHelper\Example.ReflectionHelper.csproj", "{83702323-F4E6-4BB7-A213-A0D81193BCAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A175B972-4D83-4505-8E83-E93A23BD13C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A175B972-4D83-4505-8E83-E93A23BD13C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A175B972-4D83-4505-8E83-E93A23BD13C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A175B972-4D83-4505-8E83-E93A23BD13C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83702323-F4E6-4BB7-A213-A0D81193BCAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83702323-F4E6-4BB7-A213-A0D81193BCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83702323-F4E6-4BB7-A213-A0D81193BCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83702323-F4E6-4BB7-A213-A0D81193BCAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
