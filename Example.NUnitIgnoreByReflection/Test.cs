@@ -4,10 +4,14 @@ using System;
 namespace Example.NUnitIgnoreByReflection
 {
     [TestFixture("Run")]
-    [TestFixture("Ignore")]
-    [TestFixture("Inconclusive")]
-    [TestFixture("IgnoreByReflection")]
-    [TestFixture("InconclusiveByReflection")]
+    [TestFixture("Ignore_Constructor")]
+    [TestFixture("Inconclusive_Constructor")]
+    [TestFixture("IgnoreByReflection_Constructor")]
+    [TestFixture("InconclusiveByReflection_Constructor")]
+    [TestFixture("Ignore_SetUp")]
+    [TestFixture("Inconclusive_SetUp")]
+    [TestFixture("IgnoreByReflection_SetUp")]
+    [TestFixture("InconclusiveByReflection_SetUp")]
     public class Test
     {
         private string _ignoreOrInconclusive;
@@ -21,17 +25,17 @@ namespace Example.NUnitIgnoreByReflection
 
             switch (_ignoreOrInconclusive)
             {
-                case "Ignore":
-                    Assert.Ignore("Ignored directly :-)");
+                case "Ignore_Constructor":
+                    Assert.Ignore("Constructor: Ignored directly :-)");
                     break;
-                case "Inconclusive":
-                    Assert.Inconclusive("Who knows what happened here?");
+                case "Inconclusive_Constructor":
+                    Assert.Inconclusive("Constructor: Who knows what happened here?");
                     break;
-                case "IgnoreByReflection":
-                    methodInvoker.Invoke("Ignore", "I am ignoring you, but not directly :-p");
+                case "IgnoreByReflection_Constructor":
+                    methodInvoker.Invoke("Ignore", "Constructor: I am ignoring you, but not directly :-p");
                     break;
-                case "InconclusiveByReflection":
-                    methodInvoker.Invoke("Inconclusive", "Results are inconclusive at this time :-o");
+                case "InconclusiveByReflection_Constructor":
+                    methodInvoker.Invoke("Inconclusive", "Constructor: Results are inconclusive at this time :-o");
                     break;
                 default:
                     break;
@@ -42,25 +46,25 @@ namespace Example.NUnitIgnoreByReflection
         public virtual void BeforeEachTest()
         {
             // Whereas this code fails for the Reflection cases (SetUp called before each test).
-            //var methodInvoker = new MethodInvoker();
+            var methodInvoker = new MethodInvoker();
 
-            //switch (_ignoreOrInconclusive)
-            //{
-            //    case "Ignore":
-            //        Assert.Ignore("Ignored directly :-)");
-            //        break;
-            //    case "Inconclusive":
-            //        Assert.Inconclusive("Who knows what happened here?");
-            //        break;
-            //    case "IgnoreByReflection":
-            //        methodInvoker.Invoke("Ignore", "I am ignoring you, but not directly :-p");
-            //        break;
-            //    case "InconclusiveByReflection":
-            //        methodInvoker.Invoke("Inconclusive", "Results are inconclusive at this time :-o");
-            //        break;
-            //    default:
-            //        break;
-            //}
+            switch (_ignoreOrInconclusive)
+            {
+                case "Ignore_SetUp":
+                    Assert.Ignore("SetUp: Ignored directly :-)");
+                    break;
+                case "Inconclusive_SetUp":
+                    Assert.Inconclusive("SetUp: Who knows what happened here?");
+                    break;
+                case "IgnoreByReflection_SetUp":
+                    methodInvoker.Invoke("Ignore", "SetUp: I am ignoring you, but not directly :-p");
+                    break;
+                case "InconclusiveByReflection_SetUp":
+                    methodInvoker.Invoke("Inconclusive", "SetUp: Results are inconclusive at this time :-o");
+                    break;
+                default:
+                    break;
+            }
         }
 
         [Test()]
