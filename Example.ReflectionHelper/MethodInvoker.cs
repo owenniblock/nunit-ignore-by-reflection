@@ -6,22 +6,37 @@ namespace Example.ReflectionHelper
 {
     public class MethodInvoker
     {
-        public void Invoke(string methodName, string exceptionText)
-        {
-            var nunitType = FindAssertType("NUnit.Framework.Assert", exceptionText);
-            var method = nunitType.GetMethod(methodName, new[] { typeof(string) });
+        private static readonly Action<string, object[]> AssertIgnore =
+            FindAssertType("NUnit.Framework.Assert", "nunit.framework").CreateStaticMethodDelegateIfExists<Action<string, object[]>>("Ignore");
 
-            if (method == null)
+        private static readonly Action<string, object[]> AssertInconclusive =
+            FindAssertType("NUnit.Framework.Assert", "nunit.framework").CreateStaticMethodDelegateIfExists<Action<string, object[]>>("Inconclusive");
+
+        public void Ignore(string message, object[] args)
+        {
+            if (AssertIgnore == null)
             {
-                throw new Exception(exceptionText);
+                // Implement fallback behavior
+                throw new Exception(message);
             }
 
-            method.Invoke(null, new object[] { exceptionText });
+            AssertIgnore?.Invoke(message, args);
         }
 
-        private Type FindAssertType(string frameworkTypeName, string exceptionText)
+        public void Inconclusive(string message, object[] args)
         {
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith("nunit.framework")))
+            if (AssertInconclusive == null)
+            {
+                // Implement fallback behavior
+                throw new Exception(message);
+            }
+
+            AssertInconclusive?.Invoke(message, args);
+        }
+
+        private static Type FindAssertType(string frameworkTypeName, string assemblyName)
+        {
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith(assemblyName)))
             {
                 var type = assembly.GetExportedTypes().FirstOrDefault(t => t.FullName == frameworkTypeName);
                 if (type != null)
@@ -30,7 +45,7 @@ namespace Example.ReflectionHelper
                 }
             }
 
-            throw new Exception(exceptionText);
+            return null;
         }
     }
 }

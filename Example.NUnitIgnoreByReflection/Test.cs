@@ -32,10 +32,10 @@ namespace Example.NUnitIgnoreByReflection
                     Assert.Inconclusive("Constructor: Who knows what happened here?");
                     break;
                 case "IgnoreByReflection_Constructor":
-                    methodInvoker.Invoke("Ignore", "Constructor: I am ignoring you, but not directly :-p");
+                    methodInvoker.Ignore("Constructor: I am ignoring you, but not directly :-p", null);
                     break;
                 case "InconclusiveByReflection_Constructor":
-                    methodInvoker.Invoke("Inconclusive", "Constructor: Results are inconclusive at this time :-o");
+                    methodInvoker.Inconclusive("Constructor: Results are inconclusive at this time :-o", null);
                     break;
                 default:
                     break;
@@ -57,10 +57,10 @@ namespace Example.NUnitIgnoreByReflection
                     Assert.Inconclusive("SetUp: Who knows what happened here?");
                     break;
                 case "IgnoreByReflection_SetUp":
-                    methodInvoker.Invoke("Ignore", "SetUp: I am ignoring you, but not directly :-p");
+                    methodInvoker.Ignore("Constructor: I am ignoring you, but not directly :-p", null);
                     break;
                 case "InconclusiveByReflection_SetUp":
-                    methodInvoker.Invoke("Inconclusive", "SetUp: Results are inconclusive at this time :-o");
+                    methodInvoker.Inconclusive("Constructor: Results are inconclusive at this time :-o", null);
                     break;
                 default:
                     break;
